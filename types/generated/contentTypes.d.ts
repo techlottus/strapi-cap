@@ -959,48 +959,6 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
-export interface PluginRedirectsRedirect extends Schema.CollectionType {
-  collectionName: 'redirects';
-  info: {
-    displayName: 'redirect';
-    pluralName: 'redirects';
-    singularName: 'redirect';
-  };
-  options: {
-    comment: '';
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::redirects.redirect',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    from: Attribute.String & Attribute.Required;
-    to: Attribute.String & Attribute.Required;
-    type: Attribute.Enumeration<['permanent', 'temporary']> &
-      Attribute.Required &
-      Attribute.DefaultTo<'permanent'>;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'plugin::redirects.redirect',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -1154,7 +1112,6 @@ declare module '@strapi/types' {
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
-      'plugin::redirects.redirect': PluginRedirectsRedirect;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
     }
