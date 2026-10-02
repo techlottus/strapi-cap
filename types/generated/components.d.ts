@@ -73,6 +73,19 @@ export interface MoleculesButton extends Schema.Component {
   };
 }
 
+export interface MoleculesCardButton extends Schema.Component {
+  collectionName: 'components_molecules_card_buttons';
+  info: {
+    displayName: 'card-button';
+  };
+  attributes: {
+    button: Attribute.Component<'molecules.button'>;
+    circle_image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    content: Attribute.Blocks;
+    title: Attribute.String;
+  };
+}
+
 export interface MoleculesFooterColumn extends Schema.Component {
   collectionName: 'components_molecules_footer_columns';
   info: {
@@ -269,14 +282,8 @@ export interface OrganismsTab extends Schema.Component {
     icon: 'stack';
   };
   attributes: {
-    bannerIconCard: Attribute.Component<'sections.banner-cards'>;
-    content: Attribute.Enumeration<
-      ['richtextImage', 'richtextVideo', 'bannerIconCard']
-    > &
-      Attribute.DefaultTo<'richtextImage'>;
-    richtextImage: Attribute.Component<'sections.rich-text-image', true>;
-    richtextVideo: Attribute.Component<'sections.rich-text-video', true>;
-    title: Attribute.String;
+    cardlist: Attribute.Component<'sections.card-list'>;
+    tab_label: Attribute.String;
   };
 }
 
@@ -284,10 +291,10 @@ export interface OrganismsTabList extends Schema.Component {
   collectionName: 'components_organisms_tabs_lists';
   info: {
     description: '';
-    displayName: 'Container-TabList';
+    displayName: 'Pesta\u00F1as con lista de tarjetas';
   };
   attributes: {
-    accent_title: Attribute.String;
+    backgroundColor: Attribute.String;
     subtitle: Attribute.String;
     tabs: Attribute.Component<'organisms.tab', true>;
     textAlign: Attribute.Enumeration<['center', 'left']> &
@@ -340,7 +347,7 @@ export interface SectionsBanner extends Schema.Component {
   collectionName: 'components_sections_banners';
   info: {
     description: '';
-    displayName: 'Banner-hero';
+    displayName: 'Banner';
     icon: 'audio-description';
   };
   attributes: {
@@ -350,7 +357,7 @@ export interface SectionsBanner extends Schema.Component {
     ctaUrl: Attribute.String;
     desktopImage: Attribute.Media<'images'> & Attribute.Required;
     desktopRatio: Attribute.String & Attribute.DefaultTo<'7/2'>;
-    mobileImage: Attribute.Media<'images'>;
+    mobileImage: Attribute.Media<'images'> & Attribute.Required;
     mobileRatio: Attribute.String & Attribute.DefaultTo<'4/3'>;
     overlay: Attribute.Enumeration<['none', 'white', 'black']>;
     subtitle: Attribute.String;
@@ -378,7 +385,7 @@ export interface SectionsBannerCards extends Schema.Component {
   collectionName: 'components_sections_banner_cards';
   info: {
     description: '';
-    displayName: 'BannerIconCard';
+    displayName: 'Banner contenedor de tarjetas';
     icon: 'apps';
   };
   attributes: {
@@ -453,10 +460,11 @@ export interface SectionsCardList extends Schema.Component {
   collectionName: 'components_sections_card_lists';
   info: {
     description: '';
-    displayName: 'Container-cardList';
+    displayName: 'Lista de tarjetas';
   };
   attributes: {
     cards: Attribute.Component<'sections.card', true>;
+    sectionSubtitle: Attribute.Text;
     title: Attribute.String;
   };
 }
@@ -622,32 +630,13 @@ export interface SectionsFaqSection extends Schema.Component {
   collectionName: 'components_sections_faq_sections';
   info: {
     description: '';
-    displayName: 'faq-section';
+    displayName: 'Preguntas frecuentes';
     icon: 'layer';
   };
   attributes: {
     description: Attribute.Blocks;
     faqs: Attribute.Component<'organisms.faqs'>;
     title: Attribute.String;
-  };
-}
-
-export interface SectionsGoogleMap extends Schema.Component {
-  collectionName: 'components_sections_google_maps';
-  info: {
-    description: '';
-    displayName: 'GoogleMap';
-  };
-  attributes: {
-    address: Attribute.Text;
-    admissionPhone: Attribute.String;
-    detailPosition: Attribute.Enumeration<['left', 'right', 'top']>;
-    name: Attribute.String;
-    receptionPhone: Attribute.String;
-    schedule: Attribute.String;
-    src: Attribute.Text & Attribute.Required;
-    title: Attribute.String;
-    type: Attribute.Enumeration<['tour', 'map']> & Attribute.DefaultTo<'map'>;
   };
 }
 
@@ -690,7 +679,7 @@ export interface SectionsHeroSlider extends Schema.Component {
   collectionName: 'components_sections_hero_sliders';
   info: {
     description: '';
-    displayName: 'Slider-hero';
+    displayName: 'Carrusel principal';
   };
   attributes: {
     description: Attribute.Blocks;
@@ -716,7 +705,7 @@ export interface SectionsIconTextListImage extends Schema.Component {
   collectionName: 'components_sections_icon_text_list_images';
   info: {
     description: '';
-    displayName: 'IconTextListImage';
+    displayName: 'Listado con iconos + texto e imagen';
   };
   attributes: {
     description: Attribute.Blocks;
@@ -778,7 +767,7 @@ export interface SectionsLeaderboard extends Schema.Component {
   collectionName: 'components_sections_leaderboards';
   info: {
     description: '';
-    displayName: 'Banner-leaderboard';
+    displayName: 'Cintillo';
   };
   attributes: {
     button: Attribute.Component<'molecules.button'>;
@@ -1003,7 +992,7 @@ export interface SectionsRichTextImage extends Schema.Component {
   collectionName: 'components_sections_rich_text_images';
   info: {
     description: '';
-    displayName: 'RichTextImage';
+    displayName: 'Texto e imagen';
   };
   attributes: {
     backgroundColor: Attribute.String;
@@ -1036,7 +1025,7 @@ export interface SectionsRichTextVideo extends Schema.Component {
   collectionName: 'components_sections_rich_text_videos';
   info: {
     description: '';
-    displayName: 'RichTextVideo';
+    displayName: 'Texto y video';
   };
   attributes: {
     backgroundColor: Attribute.String;
@@ -1053,15 +1042,34 @@ export interface SectionsRichTextVideo extends Schema.Component {
   };
 }
 
+export interface SectionsRichtextCard extends Schema.Component {
+  collectionName: 'components_sections_richtext_cards';
+  info: {
+    displayName: 'Texto e Imagen con tarjeta';
+    icon: 'layout';
+  };
+  attributes: {
+    bg_image_desktop: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    bg_image_mobile: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    card: Attribute.Component<'molecules.card-button'>;
+    cardPosition: Attribute.Enumeration<['left', 'right']> &
+      Attribute.DefaultTo<'right'>;
+    contentVariant: Attribute.Enumeration<['dark', 'light']> &
+      Attribute.DefaultTo<'dark'>;
+    richtext: Attribute.Blocks;
+  };
+}
+
 export interface SectionsRockstarInfo extends Schema.Component {
   collectionName: 'components_sections_rockstar_infos';
   info: {
+    description: '';
     displayName: 'RockstarInfo';
     icon: 'book';
   };
   attributes: {
     detail: Attribute.Blocks;
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     name: Attribute.String;
   };
 }
@@ -1069,7 +1077,7 @@ export interface SectionsRockstarInfo extends Schema.Component {
 export interface SectionsRockstarInfoList extends Schema.Component {
   collectionName: 'components_sections_rockstar_info_lists';
   info: {
-    displayName: 'RockstarInfoList';
+    displayName: 'Tarjetas con Pop up';
     icon: 'bulletList';
   };
   attributes: {
@@ -1156,7 +1164,7 @@ export interface SectionsStatisticsCardList extends Schema.Component {
   collectionName: 'components_sections_statistics_card_lists';
   info: {
     description: '';
-    displayName: 'Numbers';
+    displayName: 'Numeralia';
     icon: 'bars';
   };
   attributes: {
@@ -1295,6 +1303,7 @@ declare module '@strapi/types' {
       'atoms.text': AtomsText;
       'misc.send-whatsapp': MiscSendWhatsapp;
       'molecules.button': MoleculesButton;
+      'molecules.card-button': MoleculesCardButton;
       'molecules.footer-column': MoleculesFooterColumn;
       'molecules.footer-group-items': MoleculesFooterGroupItems;
       'molecules.image': MoleculesImage;
@@ -1330,7 +1339,6 @@ declare module '@strapi/types' {
       'sections.container-outstanding-list': SectionsContainerOutstandingList;
       'sections.events-card-container': SectionsEventsCardContainer;
       'sections.faq-section': SectionsFaqSection;
-      'sections.google-map': SectionsGoogleMap;
       'sections.hero': SectionsHero;
       'sections.hero-slider': SectionsHeroSlider;
       'sections.icon-text-item': SectionsIconTextItem;
@@ -1356,6 +1364,7 @@ declare module '@strapi/types' {
       'sections.rich-text-image': SectionsRichTextImage;
       'sections.rich-text-image-bg-image': SectionsRichTextImageBgImage;
       'sections.rich-text-video': SectionsRichTextVideo;
+      'sections.richtext-card': SectionsRichtextCard;
       'sections.rockstar-info': SectionsRockstarInfo;
       'sections.rockstar-info-list': SectionsRockstarInfoList;
       'sections.script-pixel': SectionsScriptPixel;

@@ -537,7 +537,7 @@ export interface ApiHeaderHeader extends Schema.CollectionType {
   collectionName: 'headers';
   info: {
     description: '';
-    displayName: 'header';
+    displayName: 'Men\u00FA';
     pluralName: 'headers';
     singularName: 'header';
   };
@@ -614,19 +614,18 @@ export interface ApiHomePageHomePage extends Schema.SingleType {
     publishedAt: Attribute.DateTime;
     sections: Attribute.DynamicZone<
       [
-        'sections.banner',
-        'sections.carousel',
-        'sections.overlay-card-list',
         'sections.hero-slider',
-        'sections.hero',
         'sections.statistics-card-list',
-        'sections.statistics-card',
-        'sections.text-image',
-        'sections.image-card-list',
-        'sections.promo-link-list',
-        'sections.text-content',
-        'sections.events-card-container',
-        'sections.faq-section'
+        'sections.rich-text-image',
+        'sections.icon-text-list-image',
+        'sections.card-list',
+        'sections.rockstar-info-list',
+        'sections.banner-cards',
+        'sections.banner',
+        'sections.leaderboard',
+        'sections.faq-section',
+        'sections.richtext-card',
+        'organisms.tab-list'
       ]
     >;
     seo_section: Attribute.Component<'sections.seo'>;
@@ -754,40 +753,21 @@ export interface ApiPagePage extends Schema.CollectionType {
     publishedAt: Attribute.DateTime;
     sections: Attribute.DynamicZone<
       [
-        'sections.accordion',
-        'sections.alert',
         'sections.banner',
         'sections.leaderboard',
-        'sections.banner-numeralia',
-        'sections.cards-statistics',
         'sections.carousel',
-        'sections.color-card-list',
         'sections.card-list',
-        'sections.contact-target-list',
-        'sections.container-outstanding-list',
-        'sections.link-list',
-        'sections.promo-link-list',
         'sections.icon-text-list-image',
-        'sections.introduction-image',
-        'sections.mosaic',
         'sections.statistics-card-list',
-        'sections.overlay-card-list',
-        'sections.repeatable-banner',
         'sections.rich-text-image',
-        'sections.rich-text-image-bg-image',
         'sections.rich-text-video',
         'sections.hero-slider',
         'sections.text-content',
-        'sections.google-map',
-        'sections.videos',
-        'sections.cards-detail-content',
-        'sections.cards-video-content',
-        'sections.testimonial-slider',
         'organisms.tab-list',
-        'sections.video-image',
         'sections.banner-cards',
-        'sections.table',
-        'sections.faq-section'
+        'sections.faq-section',
+        'sections.richtext-card',
+        'sections.rockstar-info-list'
       ]
     > &
       Attribute.Required;
@@ -979,48 +959,6 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
-export interface PluginRedirectsRedirect extends Schema.CollectionType {
-  collectionName: 'redirects';
-  info: {
-    displayName: 'redirect';
-    pluralName: 'redirects';
-    singularName: 'redirect';
-  };
-  options: {
-    comment: '';
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::redirects.redirect',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    from: Attribute.String & Attribute.Required;
-    to: Attribute.String & Attribute.Required;
-    type: Attribute.Enumeration<['permanent', 'temporary']> &
-      Attribute.Required &
-      Attribute.DefaultTo<'permanent'>;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'plugin::redirects.redirect',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -1174,7 +1112,6 @@ declare module '@strapi/types' {
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
-      'plugin::redirects.redirect': PluginRedirectsRedirect;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
     }
