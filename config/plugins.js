@@ -20,10 +20,11 @@ module.exports = ({ env }) => ({
   },
   graphql: {
     config: {
-      playgroundAlways: env.bool("GRAPHQL_PLAYGROUND", false),
       endpoint: "/graphql",
       shadowCRUD: true,
-      landingPage: true,
+      landingPage: env.bool("GRAPHQL_PLAYGROUND", false),
+      defaultLimit: 25,
+      maxLimit: 100,
       depthLimit: 20,
       amountLimit: 100,
       apolloServer: {
