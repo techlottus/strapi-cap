@@ -10,22 +10,21 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "@strapi/admin": "4.26.2",
-    "@strapi/plugin-color-picker": "4.26.2",
-    "@strapi/plugin-graphql": "4.26.2",
-    "@strapi/plugin-i18n": "4.26.2",
-    "@strapi/provider-upload-aws-s3": "4.26.2",
-    "@strapi/strapi": "4.26.2",
+    "@strapi/admin": "5.56.0",
+    "@strapi/plugin-color-picker": "5.56.0",
+    "@strapi/plugin-graphql": "5.56.0",
+    "@strapi/provider-upload-aws-s3": "5.56.0",
+    "@strapi/strapi": "5.56.0",
     "pg": "^8.8.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-router-dom": "^5.2.0",
-    "styled-components": "^5.2.1"
+    "react-router-dom": "^6.0.0",
+    "styled-components": "^6.0.0"
   },
   "strapi": {
     "uuid": "686f8fb0-8c65-4cae-95fd-d1c157d575e1"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": "^24.x.x"
   }
 }

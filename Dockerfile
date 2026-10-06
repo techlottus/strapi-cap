@@ -1,5 +1,5 @@
 # Creating multi-stage build for production
-FROM node:20-slim as build
+FROM node:24-slim as build
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
@@ -12,7 +12,7 @@ COPY . .
 RUN yarn build
 
 # Creating final production image
-FROM node:20-slim
+FROM node:24-slim
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 WORKDIR /opt/
