@@ -25,6 +25,6 @@
     "uuid": "686f8fb0-8c65-4cae-95fd-d1c157d575e1"
   },
   "engines": {
-    "node": ">=20.0.0 <=22.x.x"
+    "node": "^24.x.x"
   }
 }

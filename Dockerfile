@@ -1,6 +1,5 @@
 # Creating multi-stage build for production
-FROM node:20-alpine as build
-RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev > /dev/null 2>&1
+FROM node:24-slim as build
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
@@ -13,8 +12,7 @@ COPY . .
 RUN yarn build
 
 # Creating final production image
-FROM node:20-alpine
-RUN apk add --no-cache vips-dev
+FROM node:24-slim
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 WORKDIR /opt/
