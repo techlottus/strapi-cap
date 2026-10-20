@@ -113,3 +113,10 @@ exports
 dist
 build
 .strapi-updater.json
+
+############################
+# Local backups & npm lock (project uses yarn)
+############################
+
+*.dump
+package-lock.json
